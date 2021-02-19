@@ -1,0 +1,22 @@
+version: "3.0"
+
+services:
+  db:
+    container_name: db-oracle
+    image: store/oracle/database-enterprise:12.2.0.1
+    ports:
+      - 1521:1521
+    volumes:
+      - ./data:/ORCL:delegated
+    networks:
+      - app-network
+  db_redis:
+    container_name: db-redis
+    image: redis:alpine
+    ports:
+      - 6379:6379
+    networks:
+      - app-network
+networks:
+  app-network:
+    driver: bridge
